@@ -1,0 +1,184 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MySite.master.cs"
+Inherits="SantiagoSoftDev225262V4.MySite" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%: Page.Title %> Web Application</title>
+
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- ICON LIBRARY -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e9f2ff 0%, #f7faff 40%, #eaf1ff 100%);
+        }
+
+        .body-content {
+            padding: 25px;
+            margin-top: 20px;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border: 1px solid #e6e6e6;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(90deg, #2f80ff, #3aa0ff);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+
+        .navbar a.nav-link {
+            color: white !important;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .navbar a.nav-link:hover {
+            background: rgba(255,255,255,0.18);
+        }
+
+        .nav-link.active {
+            color: #ffe66d !important;
+            font-weight: bold;
+        }
+
+        .user-badge {
+            background: rgba(255,255,255,0.25);
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            margin-top: 25px;
+            color: #666;
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<form runat="server">
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm">
+    <div class="container">
+
+        <a class="navbar-brand" runat="server" href="~/">
+            <asp:Label ID="lblAppName" runat="server" Text="SoftDev System" />
+        </a>
+
+        <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target=".navbar-collapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse">
+
+            <!-- LEFT MENU -->
+            <asp:Panel ID="pnlMenu" runat="server" CssClass="navbar-nav me-auto">
+
+                <li class="nav-item">
+                    <a id="lnkHome" runat="server" class="nav-link" href="~/Home.aspx">
+                        <i class="fa-solid fa-house"></i> Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="lnkDashboard" runat="server" class="nav-link" href="~/Dashboard.aspx">
+                        <i class="fa-solid fa-chart-line"></i> Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="lnkStudent" runat="server" class="nav-link" href="~/StudentInfoCrud.aspx">
+                        <i class="fa-solid fa-user-graduate"></i> Students
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="lnkProgram" runat="server" class="nav-link" href="~/ProgramCrud.aspx">
+                        <i class="fa-solid fa-book"></i> Programs
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="lnkCollege" runat="server" class="nav-link" href="~/CollegeCrud.aspx">
+                        <i class="fa-solid fa-building-columns"></i> College
+                    </a>
+                </li>
+
+            </asp:Panel>
+
+            <!-- RIGHT MENU -->
+            <ul class="navbar-nav ms-auto">
+
+                <asp:Panel ID="pnlLogin" runat="server">
+                    <li class="nav-item">
+                        <a id="lnkLogin" runat="server" class="nav-link" href="~/Login.aspx">
+                            <i class="fa-solid fa-right-to-bracket"></i> Login
+                        </a>
+                    </li>
+                </asp:Panel>
+
+                <asp:Panel ID="pnlUser" runat="server">
+
+                    <li class="nav-item">
+                        <span class="nav-link user-badge">
+                            👤 <asp:Label ID="lblUser" runat="server" />
+                        </span>
+                    </li>
+
+                    <li class="nav-item">
+                        <asp:LinkButton ID="btnLogout" runat="server"
+                            CssClass="nav-link"
+                            OnClick="btnLogout_Click">
+                            <i class="fa-solid fa-power-off"></i> Logout
+                        </asp:LinkButton>
+                    </li>
+
+                </asp:Panel>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container body-content">
+
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+
+    <footer>
+        <p>&copy; <%: DateTime.Now.Year %> - Elective 2 System</p>
+    </footer>
+
+</div>
+
+</form>
+</body>
+</html>
