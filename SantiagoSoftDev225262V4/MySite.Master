@@ -1,0 +1,249 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MySite.master.cs"
+Inherits="SantiagoSoftDev225262V4.MySite" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%: Page.Title %> | Web Application</title>
+
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(135deg,#e9f2ff,#f7faff,#eaf1ff);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .body-content {
+            margin-top: 20px;
+            padding: 25px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.10);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(90deg,#2f80ff,#3aa0ff);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+
+        .navbar a.nav-link {
+            color: white !important;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: 0.2s ease;
+        }
+
+        .navbar a.nav-link:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .nav-link.active {
+            color: #ffe66d !important;
+            font-weight: bold;
+        }
+
+        .user-badge {
+            background: rgba(255,255,255,0.25);
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: gray;
+        }
+
+        /* IDLE POPUP */
+        #idlePopup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 99999;
+            width: 260px;
+            text-align: center;
+        }
+
+        #idlePopup button {
+            margin-top: 10px;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+<form runat="server">
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-sm">
+<div class="container">
+
+    <a class="navbar-brand" runat="server" href="~/">
+        <i class="fa-solid fa-laptop-code"></i>
+        <asp:Label ID="lblAppName" runat="server" Text="SoftDev System" />
+    </a>
+
+    <div class="collapse navbar-collapse">
+
+        <asp:Panel ID="pnlMenu" runat="server" CssClass="navbar-nav me-auto">
+
+            <a runat="server" id="lnkHome" class="nav-link" href="~/Home.aspx">
+                <i class="fa fa-house"></i> Home
+            </a>
+
+            <a runat="server" id="lnkDashboard" class="nav-link" href="~/Dashboard.aspx">
+                <i class="fa fa-chart-line"></i> Dashboard
+            </a>
+
+            <a runat="server" id="lnkStudent" class="nav-link" href="~/StudentInfoCrud.aspx">
+                <i class="fa fa-user-graduate"></i> Students
+            </a>
+
+            <a runat="server" id="lnkProgram" class="nav-link" href="~/ProgramCrud.aspx">
+                <i class="fa fa-book-open"></i> Programs
+            </a>
+
+            <a runat="server" id="lnkCollege" class="nav-link" href="~/CollegeCrud.aspx">
+                <i class="fa fa-building-columns"></i> College
+            </a>
+
+        </asp:Panel>
+
+        <ul class="navbar-nav ms-auto">
+
+            <asp:Panel ID="pnlLogin" runat="server">
+                <li>
+                    <a runat="server" class="nav-link" href="~/Login.aspx">
+                        <i class="fa fa-right-to-bracket"></i> Login
+                    </a>
+                </li>
+            </asp:Panel>
+
+            <asp:Panel ID="pnlUser" runat="server">
+
+                <li>
+                    <span class="nav-link user-badge">
+                        <i class="fa fa-user"></i>
+                        <asp:Label ID="lblUser" runat="server" />
+                    </span>
+                </li>
+
+                <li>
+                    <asp:LinkButton ID="btnLogout" runat="server"
+                        CssClass="nav-link"
+                        OnClick="btnLogout_Click">
+                        <i class="fa fa-right-from-bracket"></i> Logout
+                    </asp:LinkButton>
+                </li>
+
+            </asp:Panel>
+
+        </ul>
+
+    </div>
+</div>
+</nav>
+
+<!-- PAGE CONTENT -->
+<div class="container body-content">
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+</div>
+
+<footer>
+    &copy; <%: DateTime.Now.Year %> SoftDev System
+</footer>
+
+<!-- IDLE POPUP -->
+<div id="idlePopup">
+    <div id="idleText">Logging out in 10s...</div>
+    <button onclick="stayLoggedIn()">Stay Logged In</button>
+</div>
+
+<script>
+    let idle = 0;
+    let warning = false;
+    let countdown = 10;
+    let interval;
+
+    function reset() {
+        idle = 0;
+
+        if (warning) {
+            document.getElementById("idlePopup").style.display = "none";
+            clearInterval(interval);
+            warning = false;
+        }
+    }
+
+    setInterval(() => {
+        idle++;
+
+        if (idle >= 60 && !warning) {
+            warning = true;
+            document.getElementById("idlePopup").style.display = "block";
+
+            countdown = 10;
+
+            interval = setInterval(() => {
+
+                document.getElementById("idleText").innerText =
+                    "Logging out in " + countdown + "s...";
+
+                countdown--;
+
+                if (countdown < 0) {
+                    window.location.href = "Logout.aspx";
+                }
+
+            }, 1000);
+        }
+
+    }, 1000);
+
+    document.onmousemove = reset;
+    document.onkeypress = reset;
+    document.onclick = reset;
+    document.onscroll = reset;
+
+    function stayLoggedIn() {
+        reset();
+    }
+</script>
+
+</form>
+</body>
+</html>
