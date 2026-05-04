@@ -141,6 +141,15 @@ namespace SantiagoSoftDev225262V4
         protected global::System.Web.UI.WebControls.TextBox txtNewPW;
 
         /// <summary>
+        /// txtConfirmPW control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtConfirmPW;
+
+        /// <summary>
         /// txtEmail control.
         /// </summary>
         /// <remarks>
@@ -238,15 +247,6 @@ namespace SantiagoSoftDev225262V4
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtUNReset;
-
-        /// <summary>
-        /// txtEmailReset control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmailReset;
 
         /// <summary>
         /// btnSendResetOTP control.

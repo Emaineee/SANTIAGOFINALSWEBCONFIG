@@ -1,59 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SantiagoSoftDev225262V4
 {
-    public partial class MySite : System.Web.UI.MasterPage
+    public partial class MySite : MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool loggedIn = Session["User"] != null;
+            bool isLoggedIn = Session["User"] != null;
 
-            // LOGIN / LOGOUT UI
-            pnlLogin.Visible = !loggedIn;
-            pnlUser.Visible = loggedIn;
-            pnlMenu.Visible = loggedIn;
+            // Show/hide secured nav section
+            pnlSecuredNav.Visible = isLoggedIn;
+            pnlUserInfo.Visible   = isLoggedIn;
+            pnlGuest.Visible      = !isLoggedIn;
 
-            if (loggedIn)
-            {
-                lblUser.Text = Session["User"].ToString();
-                lblAppName.Text = Session["User"].ToString() + " | Web Application";
-            }
-            else
-            {
-                lblAppName.Text = "Web Application";
-            }
-
-            // ACTIVE PAGE HIGHLIGHT
-            string page = Request.AppRelativeCurrentExecutionFilePath.ToLower();
-
-            ResetNav();
-
-            if (page.Contains("student"))
-                lnkStudent.Attributes["class"] = "nav-link active";
-
-            else if (page.Contains("program"))
-                lnkProgram.Attributes["class"] = "nav-link active";
-
-            else if (page.Contains("college"))
-                lnkCollege.Attributes["class"] = "nav-link active";
+            if (isLoggedIn)
+                litUsername.Text = Server.HtmlEncode(Session["User"].ToString());
         }
 
-        private void ResetNav()
-        {
-            lnkStudent.Attributes["class"] = "nav-link";
-            lnkProgram.Attributes["class"] = "nav-link";
-            lnkCollege.Attributes["class"] = "nav-link";
-        }
-
-        protected void btnLogout_Click(object sender, EventArgs e)
+        /// <summary>Destroys session and redirects to landing/login page.</summary>
+        protected void lbtnLogout_Click(object sender, EventArgs e)
         {
             Session.Clear();
             Session.Abandon();
+
+            // Prevent back-button cache access
+            Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+            Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+
             Response.Redirect("~/Login.aspx");
         }
     }

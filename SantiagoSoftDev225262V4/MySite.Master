@@ -1,249 +1,719 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MySite.master.cs"
-Inherits="SantiagoSoftDev225262V4.MySite" %>
-
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MySite.Master.cs" Inherits="SantiagoSoftDev225262V4.MySite" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head runat="server">
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SoftDev System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+<style>
+/* ═══════════════════════════════════════════════════════════
+   CSS VARIABLES — Light Blue Feminine Theme
+═══════════════════════════════════════════════════════════ */
+:root {
+    --sky-50:    #f0f9ff;
+    --sky-100:   #e0f2fe;
+    --sky-200:   #bae6fd;
+    --sky-300:   #7dd3fc;
+    --sky-400:   #38bdf8;
+    --sky-500:   #0ea5e9;
+    --sky-600:   #0284c7;
+    --sky-700:   #0369a1;
 
-    <title><%: Page.Title %> | Web Application</title>
+    --blush:     #fce7f3;
+    --blush-d:   #fbcfe8;
+    --rose:      #f43f5e;
+    --rose-s:    #fb7185;
 
-    <webopt:BundleReference runat="server" Path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    --lavender:  #ede9fe;
+    --violet:    #8b5cf6;
 
-    <!-- FONT AWESOME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    --mint:      #d1fae5;
+    --emerald:   #10b981;
 
-    <style>
+    --white:     #ffffff;
+    --bg:        #f0f8ff;
+    --bg-card:   #ffffff;
+    --border:    #bae6fd;
+    --border-s:  #e0f2fe;
 
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: linear-gradient(135deg,#e9f2ff,#f7faff,#eaf1ff);
-        }
+    --text-dark:  #0c4a6e;
+    --text-mid:   #0369a1;
+    --text-muted: #7fb7d4;
+    --text-body:  #334155;
 
-        .container {
-            max-width: 1200px;
-            margin: auto;
-        }
+    --sidebar-w:  250px;
+    --radius-lg:  20px;
+    --radius-md:  14px;
+    --radius-sm:  10px;
+    --shadow:     0 4px 24px rgba(14,165,233,0.10);
+    --shadow-md:  0 8px 32px rgba(14,165,233,0.16);
+    --transition: .22s cubic-bezier(.4,0,.2,1);
+}
 
-        .body-content {
-            margin-top: 20px;
-            padding: 25px;
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.10);
-        }
+/* ═══════════════════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
 
-        /* NAVBAR */
-        .navbar {
-            background: linear-gradient(90deg,#2f80ff,#3aa0ff);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-        }
+body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+    /* Soft dot pattern background */
+    background-image:
+        radial-gradient(circle, rgba(14,165,233,0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-attachment: fixed;
+}
 
-        .navbar-brand {
-            color: white !important;
-            font-weight: bold;
-        }
+/* ═══════════════════════════════════════════════════════════
+   APP SHELL
+═══════════════════════════════════════════════════════════ */
+.app-shell { display: flex; min-height: 100vh; }
 
-        .navbar a.nav-link {
-            color: white !important;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: 0.2s ease;
-        }
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════════════════════════ */
+.sidebar {
+    width: var(--sidebar-w);
+    background: linear-gradient(180deg, #e0f2fe 0%, #f0f9ff 60%, #fce7f3 100%);
+    border-right: 2px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    z-index: 100;
+    transition: transform var(--transition);
+    overflow-y: auto;
+    box-shadow: 4px 0 24px rgba(14,165,233,0.08);
+}
 
-        .navbar a.nav-link:hover {
-            background: rgba(255,255,255,0.2);
-        }
+/* Brand area */
+.sidebar-brand {
+    padding: 28px 20px 22px;
+    border-bottom: 2px solid var(--border-s);
+    text-align: center;
+}
 
-        .nav-link.active {
-            color: #ffe66d !important;
-            font-weight: bold;
-        }
+.brand-mark {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, var(--sky-400) 0%, var(--sky-600) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 10px;
+    box-shadow: 0 4px 16px rgba(56,189,248,0.4);
+    border: 3px solid white;
+}
 
-        .user-badge {
-            background: rgba(255,255,255,0.25);
-            padding: 6px 12px;
-            border-radius: 20px;
-            color: white;
-        }
+.brand-name {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.2;
+}
 
-        footer {
-            text-align: center;
-            padding: 15px;
-            font-size: 13px;
-            color: gray;
-        }
+.brand-sub {
+    font-size: .68rem;
+    color: var(--text-muted);
+    letter-spacing: .5px;
+    margin-top: 3px;
+    font-weight: 500;
+}
 
-        /* IDLE POPUP */
-        #idlePopup {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-            display: none;
-            z-index: 99999;
-            width: 260px;
-            text-align: center;
-        }
+/* Sparkle decoration */
+.sparkles {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 6px;
+    font-size: 10px;
+}
 
-        #idlePopup button {
-            margin-top: 10px;
-            padding: 6px 12px;
-            border: none;
-            border-radius: 6px;
-            background: #28a745;
-            color: white;
-            cursor: pointer;
-        }
+/* Nav sections */
+.nav-section { padding: 14px 14px 6px; }
 
-    </style>
+.nav-label {
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--sky-400);
+    padding: 0 8px;
+    margin-bottom: 6px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--text-mid);
+    text-decoration: none;
+    font-size: .875rem;
+    font-weight: 600;
+    transition: background var(--transition), color var(--transition), transform var(--transition);
+    margin-bottom: 3px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-family: 'Nunito', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(56,189,248,0.12), transparent);
+    opacity: 0;
+    transition: opacity var(--transition);
+    border-radius: var(--radius-sm);
+}
+
+.nav-link:hover { color: var(--sky-700); transform: translateX(3px); }
+.nav-link:hover::before { opacity: 1; }
+
+.nav-link.active {
+    background: linear-gradient(90deg, rgba(56,189,248,0.18), rgba(56,189,248,0.06));
+    color: var(--sky-700);
+    border: 1.5px solid var(--border);
+}
+
+.nav-icon {
+    width: 20px; height: 20px;
+    text-align: center;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+/* Sidebar footer */
+.sidebar-footer {
+    margin-top: auto;
+    padding: 16px 14px;
+    border-top: 2px solid var(--border-s);
+}
+
+.user-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    background: white;
+    border: 1.5px solid var(--border);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+}
+
+.user-avatar {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--blush-d) 0%, var(--sky-200) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(14,165,233,0.2);
+}
+
+.user-name {
+    font-size: .82rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.user-role {
+    font-size: .66rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    background: #fff1f2;
+    border: 1.5px solid #fecdd3;
+    color: #e11d48;
+    font-size: .855rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+    font-family: 'Nunito', sans-serif;
+    text-decoration: none;
+}
+
+.logout-btn:hover {
+    background: #ffe4e6;
+    transform: translateX(2px);
+    text-decoration: none;
+}
+
+.guest-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    background: #eff6ff;
+    border: 1.5px solid var(--border);
+    color: var(--sky-700);
+    font-size: .855rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+    font-family: 'Nunito', sans-serif;
+    text-decoration: none;
+}
+
+.guest-btn:hover { background: var(--sky-100); transform: translateX(2px); text-decoration: none; }
+
+/* ═══════════════════════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════════════════════ */
+.main-content {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    min-height: 100vh;
+}
+
+/* Top Bar */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 28px;
+    border-bottom: 2px solid var(--border-s);
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 12px rgba(14,165,233,0.07);
+}
+
+.topbar-left { display: flex; flex-direction: column; }
+
+.topbar-title {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: -.2px;
+}
+
+.topbar-breadcrumb {
+    font-size: .72rem;
+    color: var(--text-muted);
+    margin-top: 1px;
+    font-weight: 500;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.topbar-badge {
+    padding: 5px 14px;
+    background: var(--sky-100);
+    border: 1.5px solid var(--border);
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 700;
+    color: var(--sky-700);
+    font-family: 'Quicksand', sans-serif;
+    letter-spacing: .3px;
+}
+
+.hamburger {
+    display: none;
+    background: var(--sky-100);
+    border: 1.5px solid var(--border);
+    color: var(--sky-700);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+}
+
+/* Page Body */
+.page-body {
+    padding: 28px 32px;
+    max-width: 1200px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR OVERLAY (MOBILE)
+═══════════════════════════════════════════════════════════ */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(12,74,110,0.3);
+    backdrop-filter: blur(2px);
+    z-index: 99;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-overlay.open { display: block; }
+    .main-content { margin-left: 0; }
+    .hamburger { display: block; }
+    .page-body { padding: 20px 16px; }
+    .topbar { padding: 12px 16px; }
+    .topbar-badge { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SHARED COMPONENT STYLES (used across pages)
+═══════════════════════════════════════════════════════════ */
+
+/* Cards */
+.card-base {
+    background: white;
+    border: 2px solid var(--border-s);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    margin-bottom: 24px;
+}
+
+/* Page header */
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.page-header-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    background: var(--sky-100);
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+}
+
+.page-header-text h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 3px;
+}
+
+.page-header-text p {
+    font-size: .83rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Buttons (global) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    font-family: 'Nunito', sans-serif;
+    font-size: .875rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+    letter-spacing: .1px;
+}
+
+.btn:hover { transform: translateY(-2px); opacity: .92; }
+.btn:active { transform: translateY(0); }
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--sky-400) 0%, var(--sky-600) 100%);
+    color: white;
+    box-shadow: 0 4px 16px rgba(56,189,248,0.35);
+}
+
+.btn-primary:hover { box-shadow: 0 6px 24px rgba(56,189,248,0.5); }
+
+.btn-success {
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    color: white;
+    box-shadow: 0 4px 14px rgba(16,185,129,0.3);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: white;
+    box-shadow: 0 4px 14px rgba(245,158,11,0.3);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
+    color: white;
+    box-shadow: 0 4px 14px rgba(225,29,72,0.28);
+}
+
+.btn-ghost {
+    background: white;
+    color: var(--text-mid);
+    border: 1.5px solid var(--border);
+}
+
+.btn-ghost:hover { background: var(--sky-50); }
+
+/* Tables */
+.table-wrap { overflow-x: auto; border-radius: var(--radius-md); }
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .875rem;
+}
+
+.data-table th {
+    background: linear-gradient(90deg, var(--sky-100) 0%, var(--sky-50) 100%);
+    color: var(--text-dark);
+    padding: 14px 16px;
+    text-align: left;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: .8rem;
+    letter-spacing: .4px;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+}
+
+.data-table td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--border-s);
+    color: var(--text-body);
+    font-weight: 500;
+}
+
+.data-table tr:hover td { background: var(--sky-50); }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* Form inputs */
+.form-group { margin-bottom: 18px; }
+
+.form-label {
+    display: block;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--sky-50);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-dark);
+    font-family: 'Nunito', sans-serif;
+    font-size: .925rem;
+    font-weight: 500;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.form-input::placeholder { color: var(--text-muted); }
+
+.form-input:focus {
+    border-color: var(--sky-400);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
+}
+
+/* Badges */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .3px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.badge-blue { background: var(--sky-100); color: var(--sky-700); border: 1px solid var(--border); }
+.badge-green { background: var(--mint); color: #065f46; border: 1px solid #a7f3d0; }
+.badge-rose { background: var(--blush); color: #9f1239; border: 1px solid var(--blush-d); }
+
+/* Message labels */
+.msg-error { color: var(--rose); font-size: .83rem; font-weight: 600; display: block; margin-top: 8px; }
+.msg-success { color: var(--emerald); font-size: .83rem; font-weight: 600; display: block; margin-top: 8px; }
+</style>
 </head>
 
 <body>
-<form runat="server">
+    <form id="form1" runat="server">
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-sm">
-<div class="container">
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-    <a class="navbar-brand" runat="server" href="~/">
-        <i class="fa-solid fa-laptop-code"></i>
-        <asp:Label ID="lblAppName" runat="server" Text="SoftDev System" />
-    </a>
+        <div class="app-shell">
 
-    <div class="collapse navbar-collapse">
+            <!-- ══════════════════════════════════════════════
+                 SIDEBAR
+            ══════════════════════════════════════════════ -->
+            <nav class="sidebar" id="sidebar">
+                <div class="sidebar-brand">
+                    <div class="brand-mark">🌸</div>
+                    <div class="brand-name">SoftDev MS</div>
+                    <div class="brand-sub">Student Information System</div>
+                    <div class="sparkles">✨ 💙 ✨</div>
+                </div>
 
-        <asp:Panel ID="pnlMenu" runat="server" CssClass="navbar-nav me-auto">
-
-            <a runat="server" id="lnkHome" class="nav-link" href="~/Home.aspx">
-                <i class="fa fa-house"></i> Home
-            </a>
-
-            <a runat="server" id="lnkDashboard" class="nav-link" href="~/Dashboard.aspx">
-                <i class="fa fa-chart-line"></i> Dashboard
-            </a>
-
-            <a runat="server" id="lnkStudent" class="nav-link" href="~/StudentInfoCrud.aspx">
-                <i class="fa fa-user-graduate"></i> Students
-            </a>
-
-            <a runat="server" id="lnkProgram" class="nav-link" href="~/ProgramCrud.aspx">
-                <i class="fa fa-book-open"></i> Programs
-            </a>
-
-            <a runat="server" id="lnkCollege" class="nav-link" href="~/CollegeCrud.aspx">
-                <i class="fa fa-building-columns"></i> College
-            </a>
-
-        </asp:Panel>
-
-        <ul class="navbar-nav ms-auto">
-
-            <asp:Panel ID="pnlLogin" runat="server">
-                <li>
-                    <a runat="server" class="nav-link" href="~/Login.aspx">
-                        <i class="fa fa-right-to-bracket"></i> Login
+                <!-- Public links -->
+                <div class="nav-section">
+                    <div class="nav-label">Navigation</div>
+                    <a href="~/Landingpage.aspx" runat="server" class="nav-link">
+                        <span class="nav-icon">🏠</span> Home
                     </a>
-                </li>
-            </asp:Panel>
+                    <a href="~/Login.aspx" runat="server" class="nav-link">
+                        <span class="nav-icon">🔑</span> Login / Register
+                    </a>
+                </div>
 
-            <asp:Panel ID="pnlUser" runat="server">
+                <!-- Secured links -->
+                <asp:Panel ID="pnlSecuredNav" runat="server">
+                    <div class="nav-section">
+                        <div class="nav-label">Management</div>
+                        <a href="~/Dashboard.aspx" runat="server" class="nav-link">
+                            <span class="nav-icon">📊</span> Dashboard
+                        </a>
+                        <a href="~/CollegeCrud.aspx" runat="server" class="nav-link">
+                            <span class="nav-icon">🏛️</span> Colleges
+                        </a>
+                        <a href="~/ProgramCrud.aspx" runat="server" class="nav-link">
+                            <span class="nav-icon">📚</span> Programs
+                        </a>
+                        <a href="~/StudentInfoCrud.aspx" runat="server" class="nav-link">
+                            <span class="nav-icon">👩‍🎓</span> Students
+                        </a>
+                    </div>
+                </asp:Panel>
 
-                <li>
-                    <span class="nav-link user-badge">
-                        <i class="fa fa-user"></i>
-                        <asp:Label ID="lblUser" runat="server" />
-                    </span>
-                </li>
+                <!-- Footer -->
+                <div class="sidebar-footer">
+                    <asp:Panel ID="pnlUserInfo" runat="server">
+                        <div class="user-pill">
+                            <div class="user-avatar">🌸</div>
+                            <div>
+                                <div class="user-name">
+                                    <asp:Literal ID="litUsername" runat="server" />
+                                </div>
+                                <div class="user-role">Authenticated User</div>
+                            </div>
+                        </div>
+                        <asp:LinkButton ID="lbtnLogout" runat="server"
+                            CssClass="logout-btn" OnClick="lbtnLogout_Click">
+                            🚪 Sign Out
+                        </asp:LinkButton>
+                    </asp:Panel>
+                    <asp:Panel ID="pnlGuest" runat="server" Visible="false">
+                        <a href="~/Login.aspx" runat="server" class="guest-btn">
+                            🔑 Sign In
+                        </a>
+                    </asp:Panel>
+                </div>
+            </nav>
 
-                <li>
-                    <asp:LinkButton ID="btnLogout" runat="server"
-                        CssClass="nav-link"
-                        OnClick="btnLogout_Click">
-                        <i class="fa fa-right-from-bracket"></i> Logout
-                    </asp:LinkButton>
-                </li>
+            <!-- ══════════════════════════════════════════════
+                 MAIN AREA
+            ══════════════════════════════════════════════ -->
+            <div class="main-content">
 
-            </asp:Panel>
+                <!-- Top Bar -->
+                <div class="topbar">
+                    <div class="topbar-left">
+                        <div class="topbar-title">
+                            <asp:ContentPlaceHolder ID="PageTitle" runat="server">
+                                Dashboard
+                            </asp:ContentPlaceHolder>
+                        </div>
+                        <div class="topbar-breadcrumb">
+                            <asp:ContentPlaceHolder ID="PageBreadcrumb" runat="server">
+                                SoftDev System
+                            </asp:ContentPlaceHolder>
+                        </div>
+                    </div>
+                    <div class="topbar-right">
+                        <div class="topbar-badge">✨ SoftDev v4</div>
+                        <button type="button" class="hamburger" onclick="toggleSidebar()">☰</button>
+                    </div>
+                </div>
 
-        </ul>
+                <!-- Page Content -->
+                <div class="page-body">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                </div>
 
-    </div>
-</div>
-</nav>
+            </div>
+        </div>
 
-<!-- PAGE CONTENT -->
-<div class="container body-content">
-    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-</div>
-
-<footer>
-    &copy; <%: DateTime.Now.Year %> SoftDev System
-</footer>
-
-<!-- IDLE POPUP -->
-<div id="idlePopup">
-    <div id="idleText">Logging out in 10s...</div>
-    <button onclick="stayLoggedIn()">Stay Logged In</button>
-</div>
+    </form>
 
 <script>
-    let idle = 0;
-    let warning = false;
-    let countdown = 10;
-    let interval;
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('open');
+}
 
-    function reset() {
-        idle = 0;
-
-        if (warning) {
-            document.getElementById("idlePopup").style.display = "none";
-            clearInterval(interval);
-            warning = false;
+// Highlight active nav link
+(function() {
+    var path = window.location.pathname.toLowerCase();
+    var links = document.querySelectorAll('.nav-link');
+    links.forEach(function(link) {
+        var href = (link.getAttribute('href') || '').toLowerCase();
+        if (href && path.includes(href.replace('~/', '').replace('.aspx', ''))) {
+            link.classList.add('active');
         }
-    }
-
-    setInterval(() => {
-        idle++;
-
-        if (idle >= 60 && !warning) {
-            warning = true;
-            document.getElementById("idlePopup").style.display = "block";
-
-            countdown = 10;
-
-            interval = setInterval(() => {
-
-                document.getElementById("idleText").innerText =
-                    "Logging out in " + countdown + "s...";
-
-                countdown--;
-
-                if (countdown < 0) {
-                    window.location.href = "Logout.aspx";
-                }
-
-            }, 1000);
-        }
-
-    }, 1000);
-
-    document.onmousemove = reset;
-    document.onkeypress = reset;
-    document.onclick = reset;
-    document.onscroll = reset;
-
-    function stayLoggedIn() {
-        reset();
-    }
+    });
+})();
 </script>
 
-</form>
 </body>
 </html>

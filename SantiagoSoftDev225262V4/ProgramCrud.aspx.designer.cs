@@ -15,24 +15,6 @@ namespace SantiagoSoftDev225262V4
     {
 
         /// <summary>
-        /// SqlDataSourceColleges control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceColleges;
-
-        /// <summary>
-        /// GridView1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
-
-        /// <summary>
         /// LbtnAddNewRecord control.
         /// </summary>
         /// <remarks>
@@ -40,6 +22,24 @@ namespace SantiagoSoftDev225262V4
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LbtnAddNewRecord;
+
+        /// <summary>
+        /// pnlMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlMsg;
+
+        /// <summary>
+        /// lblMessege control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessege;
 
         /// <summary>
         /// Panel1 control.
@@ -78,15 +78,6 @@ namespace SantiagoSoftDev225262V4
         protected global::System.Web.UI.WebControls.DropDownList DdlCollege;
 
         /// <summary>
-        /// rfvCollege control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCollege;
-
-        /// <summary>
         /// BtnSave control.
         /// </summary>
         /// <remarks>
@@ -114,13 +105,13 @@ namespace SantiagoSoftDev225262V4
         protected global::System.Web.UI.WebControls.Button BtnCancel;
 
         /// <summary>
-        /// lblMessege control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessege;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
         /// SqlDataSource1 control.
@@ -130,5 +121,14 @@ namespace SantiagoSoftDev225262V4
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+
+        /// <summary>
+        /// CollegeDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource CollegeDataSource;
     }
 }

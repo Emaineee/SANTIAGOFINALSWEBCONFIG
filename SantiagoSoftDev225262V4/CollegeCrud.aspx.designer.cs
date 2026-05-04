@@ -15,13 +15,13 @@ namespace SantiagoSoftDev225262V4
     {
 
         /// <summary>
-        /// GridView1 control.
+        /// lblMessege control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.Label lblMessege;
 
         /// <summary>
         /// LbtnAddNewRecord control.
@@ -87,13 +87,22 @@ namespace SantiagoSoftDev225262V4
         protected global::System.Web.UI.WebControls.Button BtnCancel;
 
         /// <summary>
-        /// lblMessege control.
+        /// pnlGrid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessege;
+        protected global::System.Web.UI.WebControls.Panel pnlGrid;
+
+        /// <summary>
+        /// GridView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
         /// SqlDataSource1 control.
