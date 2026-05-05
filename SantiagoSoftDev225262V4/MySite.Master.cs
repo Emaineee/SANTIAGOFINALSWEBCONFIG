@@ -7,6 +7,12 @@ namespace SantiagoSoftDev225262V4
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Prevent browser caching of secured pages
+            Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+            Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+            Response.Cache.SetRevalidation(System.Web.HttpCacheRevalidation.AllCaches);
+
             bool isLoggedIn = Session["User"] != null;
 
             // Show/hide secured nav section

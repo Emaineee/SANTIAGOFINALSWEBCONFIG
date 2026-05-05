@@ -15,15 +15,6 @@ namespace SantiagoSoftDev225262V4
     {
 
         /// <summary>
-        /// LbtnAddNewRecord control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LbtnAddNewRecord;
-
-        /// <summary>
         /// pnlMsg control.
         /// </summary>
         /// <remarks>
@@ -40,6 +31,15 @@ namespace SantiagoSoftDev225262V4
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessege;
+
+        /// <summary>
+        /// LbtnAddNewRecord control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LbtnAddNewRecord;
 
         /// <summary>
         /// Panel1 control.
@@ -103,6 +103,15 @@ namespace SantiagoSoftDev225262V4
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnCancel;
+
+        /// <summary>
+        /// pnlGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlGrid;
 
         /// <summary>
         /// GridView1 control.

@@ -4,13 +4,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 <style>
-/* ═══════════════════════════════════════════════════════
-   LANDING PAGE  —  Feminine Light Blue Theme
-═══════════════════════════════════════════════════════ */
+/* ================================================
+   LANDING PAGE  -  Feminine Light Blue Theme
+ ================================================ */
 
 .landing-wrap { max-width: 1080px; margin: 0 auto; }
 
-/* ── HERO ── */
+/* -- HERO -- */
 .hero {
     position: relative;
     background: linear-gradient(135deg, #bae6fd 0%, #e0f2fe 45%, #fce7f3 100%);
@@ -24,20 +24,24 @@
 
 /* Decorative blobs */
 .hero::before {
-    content: '🌸';
+    content: '';
     position: absolute;
     top: 20px; right: 40px;
-    font-size: 80px;
-    opacity: .18;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: var(--sky-100);
+    opacity: .25;
     pointer-events: none;
 }
 
 .hero::after {
-    content: '💙';
+    content: '';
     position: absolute;
     bottom: 20px; left: 30px;
-    font-size: 60px;
-    opacity: .14;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--sky-200);
+    opacity: .2;
     pointer-events: none;
 }
 
@@ -145,7 +149,7 @@
 
 .hero-btn-outline:hover { background: var(--sky-50); color: var(--sky-700); }
 
-/* ── ABOUT / STUDENT CARD ── */
+/* -- ABOUT / STUDENT CARD -- */
 .about-card {
     background: white;
     border: 2px solid var(--border-s);
@@ -278,7 +282,7 @@
     .about-card { grid-template-columns: 1fr; gap: 20px; }
 }
 
-/* ── SECTION HEADING ── */
+/* -- SECTION HEADING -- */
 .sec-head {
     font-family: 'Quicksand', sans-serif;
     font-size: 1.25rem;
@@ -294,7 +298,7 @@
     font-weight: 500;
 }
 
-/* ── STAT CARDS ── */
+/* -- STAT CARDS -- */
 .stats-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -338,7 +342,7 @@
     font-family: 'Quicksand', sans-serif;
 }
 
-/* ── MODULE CARDS ── */
+/* -- MODULE CARDS -- */
 .modules-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -421,7 +425,7 @@
 
 .module-link:hover { gap: 10px; color: var(--sky-700); text-decoration: none; }
 
-/* ── FEATURES ── */
+/* -- FEATURES -- */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -470,7 +474,7 @@
     font-weight: 500;
 }
 
-/* ── REQUIREMENTS TABLE ── */
+/* -- REQUIREMENTS TABLE -- */
 .req-table {
     width: 100%;
     border-collapse: collapse;
@@ -515,7 +519,7 @@
     font-family: 'Quicksand', sans-serif;
 }
 
-/* ── CTA BANNER ── */
+/* -- CTA BANNER -- */
 .cta-banner {
     background: linear-gradient(135deg, var(--sky-100) 0%, var(--blush) 100%);
     border: 2px solid var(--border);
@@ -580,139 +584,139 @@
 
 <div class="landing-wrap">
 
-    <%-- ══ HERO ══ --%>
+    <%-- === HERO === --%>
     <div class="hero">
         <div class="hero-tag"><span class="dot"></span> Academic Information System</div>
         <h1>
             Manage Your Institution<br />
-            with <span class="accent">SoftDev MS</span> ✨
+            with <span class="accent">SoftDev MS</span>
         </h1>
         <p>
-            A centralized platform for managing Students, Academic Programs, and Colleges —
-            built for efficiency, clarity, and ease of use. Designed with care by Ulrica Loraine Santiago. 💙
+            A centralized platform for managing Students, Academic Programs, and Colleges -
+            built for efficiency, clarity, and ease of use. Designed with care by Ulrica Loraine Santiago.
         </p>
         <div class="hero-btns">
-            <a href="Login.aspx" class="hero-btn hero-btn-primary">🔑 Login to Dashboard</a>
-            <a href="Login.aspx" class="hero-btn hero-btn-outline">✨ Create Account</a>
+            <a href="Login.aspx" class="hero-btn hero-btn-primary">Login to Dashboard</a>
+            <a href="Login.aspx" class="hero-btn hero-btn-outline">Create Account</a>
         </div>
     </div>
 
-    <%-- ══ INSTRUCTOR + STUDENT INFO ══ --%>
+    <%-- === INSTRUCTOR + STUDENT INFO === --%>
     <div class="instructor-badge">
-        <div class="instructor-avatar">👩‍🏫</div>
+        <div class="instructor-avatar"></div>
         <div class="instructor-info">
             <div class="instructor-label">Course Instructor</div>
             <div class="instructor-name">Jerome Refran</div>
-            <div class="instructor-creds">CPE, MIt, DIt (Cand.) &nbsp;·&nbsp; Software Development 2</div>
+            <div class="instructor-creds">CPE, MIt, DIt (Cand.) &nbsp;.&nbsp; Software Development 2</div>
         </div>
     </div>
 
     <div class="about-card">
         <div class="about-left">
-            <div class="about-label">👩‍🎓 Student Developer</div>
+            <div class="about-label">  Student Developer</div>
             <div class="student-name">Ulrica Loraine Santiago</div>
             <div class="student-meta">
                 <strong>Course:</strong> BS Computer Engineering<br />
                 <strong>Year Level:</strong> 3rd Year &nbsp;|&nbsp; <strong>Section:</strong> BsCpe<br />
-                <strong>Semester:</strong> 2nd Semester, S.Y. 2025–2026<br />
-                <strong>Subject:</strong> Elective 2 – Software Development 2
+                <strong>Semester:</strong> 2nd Semester, S.Y. 2025-2026<br />
+                <strong>Subject:</strong> Elective 2 - Software Development 2
             </div>
         </div>
         <div class="about-right">
-            <div class="about-label">📋 Portfolio Requirements</div>
+            <div class="about-label">Portfolio Requirements</div>
             <table class="portfolio-table">
                 <thead>
                     <tr><th>#</th><th>Requirement</th><th>Status</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>1</td><td>Landing Page (Public)</td><td><span style="color:var(--emerald);font-weight:700;">✔ Done</span></td></tr>
-                    <tr><td>2</td><td>Login &amp; Sign-up Page</td><td><span style="color:var(--emerald);font-weight:700;">✔ Done</span></td></tr>
-                    <tr><td>3</td><td>Secured Web App (After Login)</td><td><span style="color:var(--emerald);font-weight:700;">✔ Done</span></td></tr>
-                    <tr><td>4</td><td>CRUD Functionality</td><td><span style="color:var(--emerald);font-weight:700;">✔ Done</span></td></tr>
-                    <tr><td>5</td><td>Validation &amp; Error Handling</td><td><span style="color:var(--emerald);font-weight:700;">✔ Done</span></td></tr>
-                    <tr><td>6</td><td>Security / Session Auth</td><td><span style="color:var(--emerald);font-weight:700;">✔ Done</span></td></tr>
-                    <tr><td>7</td><td>Logout Functionality</td><td><span style="color:var(--emerald);font-weight:700;">✔ Done</span></td></tr>
-                    <tr><td>8</td><td>Responsive UI/CSS</td><td><span style="color:var(--emerald);font-weight:700;">✔ Done</span></td></tr>
+                    <tr><td>1</td><td>Landing Page (Public)</td><td><span style="color:var(--emerald);font-weight:700;">Done</span></td></tr>
+                    <tr><td>2</td><td>Login &amp; Sign-up Page</td><td><span style="color:var(--emerald);font-weight:700;">Done</span></td></tr>
+                    <tr><td>3</td><td>Secured Web App (After Login)</td><td><span style="color:var(--emerald);font-weight:700;">Done</span></td></tr>
+                    <tr><td>4</td><td>CRUD Functionality</td><td><span style="color:var(--emerald);font-weight:700;">Done</span></td></tr>
+                    <tr><td>5</td><td>Validation &amp; Error Handling</td><td><span style="color:var(--emerald);font-weight:700;">Done</span></td></tr>
+                    <tr><td>6</td><td>Security / Session Auth</td><td><span style="color:var(--emerald);font-weight:700;">Done</span></td></tr>
+                    <tr><td>7</td><td>Logout Functionality</td><td><span style="color:var(--emerald);font-weight:700;">Done</span></td></tr>
+                    <tr><td>8</td><td>Responsive UI/CSS</td><td><span style="color:var(--emerald);font-weight:700;">Done</span></td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <%-- ══ STATS ══ --%>
+    <%-- === STATS === --%>
     <div class="sec-head">System Overview</div>
     <div class="sec-sub">A quick look at what's inside the system.</div>
 
     <div class="stats-row">
         <div class="stat-card">
-            <div class="stat-icon">🏛️</div>
-            <div class="stat-val">—</div>
+            
+            <div class="stat-val"></div>
             <div class="stat-lbl">Colleges</div>
         </div>
         <div class="stat-card">
-            <div class="stat-icon">📚</div>
-            <div class="stat-val">—</div>
+            
+            <div class="stat-val"></div>
             <div class="stat-lbl">Programs</div>
         </div>
         <div class="stat-card">
-            <div class="stat-icon">👩‍🎓</div>
-            <div class="stat-val">—</div>
+            
+            <div class="stat-val"></div>
             <div class="stat-lbl">Students</div>
         </div>
     </div>
 
-    <%-- ══ MODULES ══ --%>
-    <div class="sec-head">System Modules 🌸</div>
+    <%-- === MODULES === --%>
+    <div class="sec-head">System Modules</div>
     <div class="sec-sub">Access all management tools from a single, unified platform.</div>
 
     <div class="modules-grid">
         <div class="module-card sky">
-            <div class="module-icon sky">👩‍🎓</div>
+            <div class="module-icon sky"> </div>
             <div class="module-title">Student Information</div>
             <div class="module-desc">Manage student profiles, academic records, and personal details with full CRUD support.</div>
-            <a href="StudentInfoCrud.aspx" class="module-link">Open Module →</a>
+            <a href="StudentInfoCrud.aspx" class="module-link">Open Module</a>
         </div>
         <div class="module-card rose">
-            <div class="module-icon rose">📚</div>
+            <div class="module-icon rose"></div>
             <div class="module-title">Program Management</div>
             <div class="module-desc">Create, update, and organize academic programs linked to colleges in your institution.</div>
-            <a href="ProgramCrud.aspx" class="module-link">Open Module →</a>
+            <a href="ProgramCrud.aspx" class="module-link">Open Module</a>
         </div>
         <div class="module-card mint">
-            <div class="module-icon mint">🏛️</div>
+            <div class="module-icon mint"></div>
             <div class="module-title">College Management</div>
             <div class="module-desc">Maintain college records, codes, and hierarchical structures for your institution.</div>
-            <a href="CollegeCrud.aspx" class="module-link">Open Module →</a>
+            <a href="CollegeCrud.aspx" class="module-link">Open Module</a>
         </div>
     </div>
 
-    <%-- ══ FEATURES ══ --%>
-    <div class="sec-head">Why SoftDev MS? 💙</div>
+    <%-- === FEATURES === --%>
+    <div class="sec-head">Why SoftDev </div>
     <div class="sec-sub">Built to meet modern academic administration standards.</div>
 
     <div class="features-grid">
         <div class="feature-item">
-            <div class="feature-dot">🔒</div>
+            <div class="feature-dot"></div>
             <div>
                 <div class="feature-title">Secure Access</div>
                 <div class="feature-desc">Session-based auth with automatic logout on inactivity.</div>
             </div>
         </div>
         <div class="feature-item">
-            <div class="feature-dot">📦</div>
+            <div class="feature-dot"></div>
             <div>
                 <div class="feature-title">Full CRUD</div>
                 <div class="feature-desc">Create, Read, Update, Delete with proper validation.</div>
             </div>
         </div>
         <div class="feature-item">
-            <div class="feature-dot">📱</div>
+            <div class="feature-dot"></div>
             <div>
                 <div class="feature-title">Responsive</div>
                 <div class="feature-desc">Works on desktop, tablet, and mobile seamlessly.</div>
             </div>
         </div>
         <div class="feature-item">
-            <div class="feature-dot">📬</div>
+            <div class="feature-dot"></div>
             <div>
                 <div class="feature-title">OTP Verification</div>
                 <div class="feature-desc">Email-based OTP for registration and password recovery.</div>
@@ -720,15 +724,15 @@
         </div>
     </div>
 
-    <%-- ══ CTA ══ --%>
+    <%-- === CTA === --%>
     <div class="cta-banner">
         <div>
-            <h3>Ready to get started? 🌸</h3>
+            <h3>Ready to get started?</h3>
             <p>Log in to access your dashboard, or create an account to join the system.</p>
         </div>
         <div class="cta-actions">
-            <a href="Login.aspx" class="cta-btn cta-btn-primary">🔑 Login Now</a>
-            <a href="Login.aspx" class="cta-btn cta-btn-ghost">✨ Register</a>
+            <a href="Login.aspx" class="cta-btn cta-btn-primary"> Login Now</a>
+            <a href="Login.aspx" class="cta-btn cta-btn-ghost"> Register</a>
         </div>
     </div>
 

@@ -5,9 +5,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 <style>
-/* ═══════════════════════════════════════
+/* ================================
    DASHBOARD PAGE
-═══════════════════════════════════════ */
+================================ */
 .dash-wrap { max-width: 1060px; margin: 0 auto; }
 
 /* Welcome banner */
@@ -189,9 +189,9 @@
 
     <!-- Welcome Banner -->
     <div class="welcome-banner">
-        <div class="welcome-avatar">🌸</div>
+        <div class="welcome-avatar"></div>
         <div class="welcome-text">
-            <h2>Welcome back, <span class="uname"><asp:Label ID="lblUser" runat="server" /></span>! 💙</h2>
+            <h2>Welcome back, <span class="uname"><asp:Label ID="lblUser" runat="server" /></span>!</h2>
             <p>Here's a quick overview of all student records in the system.</p>
         </div>
     </div>
@@ -199,18 +199,12 @@
     <!-- Quick Stats -->
     <div class="quick-stats">
         <div class="qs-card">
-            <div class="qs-icon">🏛️</div>
-            <div class="qs-val">—</div>
             <div class="qs-lbl">Colleges</div>
         </div>
         <div class="qs-card">
-            <div class="qs-icon">📚</div>
-            <div class="qs-val">—</div>
             <div class="qs-lbl">Programs</div>
         </div>
         <div class="qs-card">
-            <div class="qs-icon">👩‍🎓</div>
-            <div class="qs-val">—</div>
             <div class="qs-lbl">Students</div>
         </div>
     </div>
@@ -219,7 +213,7 @@
     <div class="table-card">
         <div class="table-card-header">
             <div>
-                <div class="table-card-title">👩‍🎓 Student Records Overview</div>
+                <div class="table-card-title"> Student Records Overview</div>
                 <div class="table-card-sub">All enrolled students with their program details</div>
             </div>
         </div>
@@ -232,7 +226,7 @@
                 Width="100%">
                 <EmptyDataTemplate>
                     <div class="empty-state">
-                        <div class="ei">👩‍🎓</div>
+                        <div class="ei"> </div>
                         <p>No student records found yet.</p>
                     </div>
                 </EmptyDataTemplate>

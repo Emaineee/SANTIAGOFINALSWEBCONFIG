@@ -9,21 +9,38 @@ namespace SantiagoSoftDev225262V4
 {
     public partial class CollegeCrud : System.Web.UI.Page
     {
+        protected System.Web.UI.HtmlControls.HtmlGenericControl colTotalCount;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) 
-            {
-                Panel1.Visible = false;
-                lblMessege.Visible = false;
-                GridView1.Visible = true;
-
-            }
             if (Session["User"] == null)
             {
                 Response.Redirect("~/Login.aspx");
                 return;
             }
 
+            if (!IsPostBack) 
+            {
+                Panel1.Visible = false;
+                lblMessege.Visible = false;
+                GridView1.Visible = true;
+                LoadCollegeCount();
+            }
+        }
+
+        private void LoadCollegeCount()
+        {
+            try
+            {
+                string connStr = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString3"].ConnectionString;
+                using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(connStr))
+                {
+                    conn.Open();
+                    int count = Convert.ToInt32(new System.Data.OleDb.OleDbCommand("SELECT COUNT(*) FROM tbl_College WHERE deleted = 0", conn).ExecuteScalar());
+                    colTotalCount.InnerText = count.ToString();
+                }
+            }
+            catch { }
         }
 
         #region "INSERT"
@@ -58,10 +75,16 @@ namespace SantiagoSoftDev225262V4
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewRow row = GridView1.SelectedRow;
-   
+
             TxtDescription.Text = HttpUtility.HtmlDecode(row.Cells[2].Text);
             TxtCode.Text = HttpUtility.HtmlDecode(row.Cells[3].Text);
 
+            //  FIX: Store the selected collegeID for update
+            if (GridView1.SelectedDataKey != null)
+            {
+                SqlDataSource1.UpdateParameters["collegeID"].DefaultValue =
+                    GridView1.SelectedDataKey["collegeID"].ToString();
+            }
 
             PageAddEdit();
             BtnSave.Visible = false;
@@ -70,6 +93,12 @@ namespace SantiagoSoftDev225262V4
         
         protected void BtnUpdate_Click(object sender, EventArgs e)
         {
+            //  FIX: Ensure collegeID is set from SelectedDataKey
+            if (GridView1.SelectedDataKey != null)
+            {
+                SqlDataSource1.UpdateParameters["collegeID"].DefaultValue =
+                    GridView1.SelectedDataKey["collegeID"].ToString();
+            }
             SqlDataSource1.Update();
         }
 
@@ -104,6 +133,7 @@ namespace SantiagoSoftDev225262V4
             Panel1.Visible = false;
             GridView1.Visible = true;
             LbtnAddNewRecord.Visible = true;
+            LoadCollegeCount();
         }
 
         private void PageAddEdit()
@@ -124,5 +154,7 @@ namespace SantiagoSoftDev225262V4
 
         }
         #endregion
+
+     
     }
 }
