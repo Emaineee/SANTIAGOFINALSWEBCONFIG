@@ -6,18 +6,38 @@ namespace SantiagoSoftDev225262V4
 {
     public partial class ProgramCrud : Page
     {
+        protected System.Web.UI.HtmlControls.HtmlGenericControl progTotalCount;
+        protected System.Web.UI.HtmlControls.HtmlGenericControl progCollegeCount;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                DdlCollege.DataBind();
-                InitializePage();
-            }
             if (Session["User"] == null)
             {
                 Response.Redirect("~/Login.aspx");
                 return;
             }
+
+            if (!IsPostBack)
+            {
+                DdlCollege.DataBind();
+                InitializePage();
+                LoadProgramCounts();
+            }
+        }
+
+        private void LoadProgramCounts()
+        {
+            try
+            {
+                string connStr = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString3"].ConnectionString;
+                using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(connStr))
+                {
+                    conn.Open();
+                    progTotalCount.InnerText = new System.Data.OleDb.OleDbCommand("SELECT COUNT(*) FROM tbl_Program WHERE deleted = 0", conn).ExecuteScalar().ToString();
+                    progCollegeCount.InnerText = new System.Data.OleDb.OleDbCommand("SELECT COUNT(DISTINCT collegeID) FROM tbl_Program WHERE deleted = 0", conn).ExecuteScalar().ToString();
+                }
+            }
+            catch { }
         }
 
         #region INSERT
@@ -38,6 +58,7 @@ namespace SantiagoSoftDev225262V4
             GridView1.Visible = true;
             LbtnAddNewRecord.Visible = true;
 
+            LoadProgramCounts();
             ShowMessage("Record Inserted Successfully");
         }
 
@@ -60,6 +81,7 @@ namespace SantiagoSoftDev225262V4
                 GridView1.Visible = true;
                 LbtnAddNewRecord.Visible = true;
 
+                LoadProgramCounts();
                 ShowMessage("Record Updated Successfully");
             }
             else
@@ -81,6 +103,7 @@ namespace SantiagoSoftDev225262V4
             LbtnAddNewRecord.Visible = true;
 
             ShowMessage("Record Deleted Successfully");
+            LoadProgramCounts();
         }
 
         protected void GridView1_RowDeleted(object sender, GridViewDeletedEventArgs e)

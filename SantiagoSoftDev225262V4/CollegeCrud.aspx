@@ -14,8 +14,8 @@
 <style>
 /* ═══════════════════════════════════════
    COLLEGE CRUD PAGE
-═══════════════════════════════════════ */
-.crud-wrap { max-width: 1060px; margin: 0 auto; }
+   ═══════════════════════════════════════ */
+.crud-wrap { width: 100%; }
 
 @keyframes fadeUp {
     from { opacity:0; transform:translateY(16px); }
@@ -44,6 +44,7 @@
     align-items: center;
     justify-content: center;
     font-size: 22px;
+    flex-shrink: 0;
 }
 
 .page-hdr h2 {
@@ -58,6 +59,34 @@
     font-size: .795rem;
     color: var(--text-muted);
     font-weight: 500;
+}
+
+/* Quick summary */
+.stat-mini {
+    background: white;
+    border: 1.5px solid var(--border-s);
+    border-radius: 14px;
+    padding: 14px 20px;
+    min-width: 150px;
+    box-shadow: var(--shadow);
+}
+
+.stat-mini-val {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.stat-mini-lbl {
+    font-size: .68rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    font-family: 'Quicksand', sans-serif;
 }
 
 /* Message bar */
@@ -119,8 +148,8 @@
 
 .form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
     margin-bottom: 20px;
 }
 
@@ -156,15 +185,6 @@
 .inp:focus {
     border-color: var(--sky-400);
     box-shadow: 0 0 0 3px rgba(56,189,248,0.16);
-}
-
-select.inp {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230ea5e9' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 36px;
-    cursor: pointer;
 }
 
 .form-actions { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -205,6 +225,12 @@ select.inp {
     gap: 10px;
 }
 
+.grid-toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .grid-toolbar-title {
     font-family: 'Quicksand', sans-serif;
     font-size: .935rem;
@@ -212,10 +238,103 @@ select.inp {
     color: var(--text-dark);
 }
 
-/* Grid table */
-.grid-scroll { overflow-x: auto; }
+.count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 10px;
+    background: var(--lavender);
+    border: 1.5px solid #c4b5fd;
+    border-radius: 99px;
+    font-size: .72rem;
+    font-weight: 700;
+    color: #6d28d9;
+    font-family: 'Quicksand', sans-serif;
+}
 
-.crud-grid { width: 100% !important; border-collapse: collapse !important; font-size: .875rem; }
+/* Search bar */
+.grid-search {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    max-width: 340px;
+    min-width: 200px;
+}
+
+.search-inp {
+    flex: 1;
+    padding: 8px 14px 8px 34px;
+    background: var(--sky-50);
+    border: 2px solid var(--border-s);
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: .82rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%237fb7d4' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242.656a5 5 0 1 1 0-10 5 5 0 0 1 0 10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+.search-inp:focus {
+    border-color: var(--sky-400);
+    box-shadow: 0 0 0 3px rgba(56,189,248,0.12);
+}
+
+.search-btn {
+    padding: 8px 14px;
+    background: var(--sky-400);
+    border: 2px solid var(--sky-500);
+    border-radius: 10px;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: .82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+    white-space: nowrap;
+}
+
+.search-btn:hover {
+    background: var(--sky-600);
+    transform: translateY(-1px);
+}
+
+.clear-btn {
+    padding: 8px 10px;
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: .8rem;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    transition: background var(--transition), color var(--transition);
+    white-space: nowrap;
+}
+
+.clear-btn:hover {
+    background: var(--sky-50);
+    color: var(--text-dark);
+}
+
+/* Grid table */
+.grid-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
+.crud-grid {
+    width: 100%;
+    min-width: 480px;
+    border-collapse: collapse;
+    font-size: .875rem;
+}
 
 .crud-grid th {
     background: var(--sky-100) !important;
@@ -301,6 +420,28 @@ select.inp {
 }
 .empty-state .ei { font-size: 38px; margin-bottom: 12px; }
 .empty-state p { font-size: .9rem; font-weight: 500; }
+
+/* ═══════════════════════════════════════
+   MOBILE RESPONSIVE
+   ═══════════════════════════════════════ */
+@media (max-width: 768px) {
+    .page-hdr {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .page-hdr .abtn-primary { width: 100%; justify-content: center; }
+    .form-panel { padding: 20px 16px; }
+    .form-grid { grid-template-columns: 1fr; gap: 12px; }
+    .form-actions { flex-direction: column; }
+    .form-actions .abtn { width: 100%; justify-content: center; }
+    .grid-toolbar { padding: 12px 14px; flex-direction: column; align-items: stretch; }
+    .grid-toolbar-left { flex-wrap: wrap; }
+    .grid-search { max-width: 100%; min-width: 0; }
+    .search-btn { padding: 8px 10px; }
+    .grid-scroll { margin: 0 -2px; }
+    .crud-grid { min-width: 420px; font-size: .82rem; }
+    .crud-grid th, .crud-grid td { padding: 10px 12px !important; }
+}
 </style>
 
 <div class="crud-wrap">
@@ -311,7 +452,7 @@ select.inp {
     <!-- Page header -->
     <div class="page-hdr">
         <div class="page-hdr-left">
-            <div class="page-hdr-icon">🏛️</div>
+            <div class="page-hdr-icon"> </div>
             <div>
                 <h2>College Management</h2>
                 <p>Add, edit, and manage college records</p>
@@ -324,13 +465,21 @@ select.inp {
         </asp:LinkButton>
     </div>
 
+    <!-- Quick Summary -->
+    <div style="display:flex; gap:14px; margin-bottom:20px; flex-wrap:wrap; animation:fadeUp .35s .05s cubic-bezier(.22,1,.36,1) both;">
+        <div class="stat-mini">
+            <div class="stat-mini-val" id="colTotalCount" runat="server">0</div>
+            <div class="stat-mini-lbl">Total Colleges</div>
+        </div>
+    </div>
+
     <!-- Main card -->
     <div class="crud-card">
 
         <!-- Form panel (toggled by code-behind) -->
         <asp:Panel ID="Panel1" runat="server" Visible="false">
             <div class="form-panel">
-                <div class="form-panel-title">🏛️ College Details</div>
+                <div class="form-panel-title"> College Details</div>
                 <div class="form-grid">
                     <div class="fg">
                         <label>College Name / Description</label>
@@ -344,9 +493,9 @@ select.inp {
                     </div>
                 </div>
                 <div class="form-actions">
-                    <asp:Button ID="BtnSave" runat="server" Text="💾 Save Record"
+                    <asp:Button ID="BtnSave" runat="server" Text="Save Record"
                         CssClass="abtn abtn-success" OnClick="BtnSave_Click" />
-                    <asp:Button ID="BtnUpdate" runat="server" Text="✏️ Update Record"
+                    <asp:Button ID="BtnUpdate" runat="server" Text="Update Record"
                         CssClass="abtn abtn-warning" OnClick="BtnUpdate_Click" Visible="false" />
                     <asp:Button ID="BtnCancel" runat="server" Text="✕ Cancel"
                         CssClass="abtn abtn-ghost" OnClick="BtnCancel_Click" />
@@ -357,7 +506,10 @@ select.inp {
         <!-- Grid -->
         <asp:Panel ID="pnlGrid" runat="server">
             <div class="grid-toolbar">
-                <div class="grid-toolbar-title">📋 College Records</div>
+                <div class="grid-toolbar-left">
+                    <div class="grid-toolbar-title"> College Records</div>
+                    <span class="count-badge" id="collegeCountBadge" runat="server">0</span>
+                </div>
             </div>
             <div class="grid-scroll">
                 <asp:GridView ID="GridView1" runat="server"
@@ -371,7 +523,7 @@ select.inp {
                     CssClass="crud-grid">
                     <EmptyDataTemplate>
                         <div class="empty-state">
-                            <div class="ei">🏛️</div>
+                            <div class="ei"> </div>
                             <p>No colleges found. Add your first one!</p>
                         </div>
                     </EmptyDataTemplate>
@@ -388,13 +540,13 @@ select.inp {
                             <ItemTemplate>
                                 <asp:LinkButton ID="lbtnEdit" runat="server"
                                     CommandName="Select" CssClass="grid-edit">
-                                    ✏️ Edit
+                                    Edit
                                 </asp:LinkButton>
                                 &nbsp;
                                 <asp:LinkButton ID="lbtnDel" runat="server"
                                     CommandName="Delete" CssClass="grid-delete"
                                     OnClientClick="return confirm('Delete this college? This cannot be undone.');">
-                                    🗑 Delete
+                                    Delete
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -430,5 +582,13 @@ select.inp {
         <asp:Parameter Name="collegeID" />
     </DeleteParameters>
 </asp:SqlDataSource>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var rows = document.querySelectorAll('.crud-grid tbody tr');
+    var badge = document.getElementById('collegeCountBadge');
+    if (badge) badge.textContent = rows.length + ' record' + (rows.length !== 1 ? 's' : '');
+});
+</script>
 
 </asp:Content>
